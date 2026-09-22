@@ -20,9 +20,9 @@ https://raw.githubusercontent.com/GByyhbot/clash/main/clash.ini
 
 ## MDC-NG 分流
 
-MDC-NG 的元数据站点已拆成独立策略组，`MDC-DMM`、`MDC-MGStage`、`MDC-JavDB`、`MDC-MissAV` 等可以分别选择节点。DMM、MGStage、AVBase、HBox 与 FC2 默认优先日本节点；ThePornDB 默认优先美国节点；其余站点仍可在策略组内手动切换。
+MDC-NG 数据源按节点要求合并为五组：`刮削-日本`、`刮削-非日`、`刮削-港台`、`刮削-美国` 和 `刮削-通用`。DMM、MGStage、HBox、FC2、Caribbean 和日亚海报使用日本组；JavDB 单独使用不包含日本节点的非日组；AirAV、7MMTV、Madou 使用港台组；ThePornDB 使用美国组；其余无强制地区要求的站点按延迟使用通用组。
 
-演员资料、海报和 DeepL 翻译分别使用 `MDC-Actors`、`MDC-Posters` 和 `MDC-DeepL`。GFriends 使用 GitHub 域名，因此沿用现有 `GitHub` 策略组；OpenAI 和 Google 翻译分别沿用现有 `ChatGPT` 和 `Google` 策略组，避免重复或互相覆盖。
+GFriends 使用 GitHub 域名，因此沿用现有 `GitHub` 策略组；OpenAI 和 Google 翻译分别沿用现有 `ChatGPT` 和 `Google` 策略组，避免重复或互相覆盖。
 
 对于 JavDB、MissAV、AVSox 等经常更换域名的数据源，规则使用站点名称关键字匹配；稳定站点使用域名后缀匹配。MDC-NG 中未启用的数据源不会产生流量，因此保留其规则不会影响日常连接。
 
