@@ -4,6 +4,18 @@ bind-address: "*"
 mode: rule
 log-level: info
 ipv6: true
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-detect-interface: true
+  route-exclude-address:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 127.0.0.0/8
+    - fc00::/7
+    - fe80::/10
 external-controller: "0.0.0.0:9090"
 external-ui: ui
 secret: "Yyh154019"
