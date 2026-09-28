@@ -94,6 +94,16 @@ rule-providers:
   Direct: { <<: *rp, path: ./ruleset/Direct.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/Direct.list" }
 
 rules:
+  # Local/private networks must bypass the proxy, especially on Android VPN/TUN.
+  - DOMAIN,localhost,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
   - RULE-SET,Check,Test
   - RULE-SET,MDC-Japan,刮削-日本
   - RULE-SET,MDC-NonJapan,刮削-非日
