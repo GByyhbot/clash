@@ -5,6 +5,7 @@
 ## 文件
 
 - `clash.ini`：唯一配置入口。
+- `mihomo.yaml`：Mihomo / FlClash 原生配置模板；部署前将 `__SUB_STORE_URL__` 替换为自己的 Sub-Store 分享链接。
 - `list/`：`clash.ini` 使用的自定义规则。
 - `list/mdc/`：MDC-NG 刮削数据源规则，每个站点独立分流。
 
@@ -17,6 +18,8 @@ https://raw.githubusercontent.com/GByyhbot/clash/main/clash.ini
 ```
 
 自定义规则统一在 `list/` 中维护。所有运行时规则均已收录到本仓库，配置不再直接下载其他规则仓库的文件。规则从上到下匹配，修改时请保留末尾的 `FINAL` 规则。
+
+安卓端建议使用 FlClash 导入 `mihomo.yaml`。模板不会保存私人订阅地址或令牌；手机无法访问 GitHub 时，可由 NAS 在局域网提供配置和安装包。
 
 ## MDC-NG 分流
 
