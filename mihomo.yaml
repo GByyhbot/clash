@@ -76,6 +76,7 @@ proxy-groups:
 
 rule-providers:
   Check: &rp { type: http, behavior: classical, format: text, interval: 86400, path: ./ruleset/Check.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/Check.list" }
+  CustomDirect: { <<: *rp, path: ./ruleset/CustomDirect.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/CustomDirect.list" }
   MDC-Japan: { <<: *rp, path: ./ruleset/mdc-japan.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/mdc/Japan.list" }
   MDC-NonJapan: { <<: *rp, path: ./ruleset/mdc-non-japan.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/mdc/NonJapan.list" }
   MDC-HKTW: { <<: *rp, path: ./ruleset/mdc-hktw.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/mdc/HKTW.list" }
@@ -104,6 +105,8 @@ rule-providers:
   Microsoft: { <<: *rp, path: ./ruleset/Microsoft.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/Microsoft.list" }
   Google: { <<: *rp, path: ./ruleset/Google.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/Google.list" }
   Direct: { <<: *rp, path: ./ruleset/Direct.list, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/Direct.list" }
+  ChinaDomain: { type: http, behavior: domain, format: yaml, interval: 86400, path: ./ruleset/ChinaDomain.yaml, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/ChinaDomain.yaml" }
+  ChinaIP: { type: http, behavior: ipcidr, format: yaml, interval: 86400, path: ./ruleset/ChinaIP.yaml, url: "https://gh-proxy.com/raw.githubusercontent.com/GByyhbot/clash/refs/heads/main/list/ChinaIP.yaml" }
 
 rules:
   # Local/private networks must bypass the proxy, especially on Android VPN/TUN.
@@ -116,6 +119,7 @@ rules:
   - IP-CIDR6,::1/128,DIRECT,no-resolve
   - IP-CIDR6,fc00::/7,DIRECT,no-resolve
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - RULE-SET,CustomDirect,DIRECT
   - RULE-SET,Check,Test
   - RULE-SET,MDC-Japan,刮削-日本
   - RULE-SET,MDC-NonJapan,刮削-非日
@@ -145,4 +149,6 @@ rules:
   - RULE-SET,Microsoft,Microsoft
   - RULE-SET,Google,Google
   - RULE-SET,Direct,国内
+  - RULE-SET,ChinaDomain,国内
+  - RULE-SET,ChinaIP,国内,no-resolve
   - MATCH,国外

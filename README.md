@@ -7,6 +7,8 @@
 - `clash.ini`：唯一配置入口。
 - `mihomo.yaml`：Mihomo / FlClash 原生配置模板；部署前将 `__SUB_STORE_URL__` 替换为自己的 Sub-Store 分享链接。
 - `list/`：`clash.ini` 使用的自定义规则。
+- `list/CustomDirect.list`：手工直连规则，优先级最高；用于修正仍被误判为国外的域名或 IP。
+- `list/ChinaDomain.yaml`、`list/ChinaIP.yaml`：本地保存的中国域名和 IP 规则库。
 - `list/mdc/`：MDC-NG 刮削数据源规则，每个站点独立分流。
 
 ## 使用
@@ -20,6 +22,21 @@ https://raw.githubusercontent.com/GByyhbot/clash/main/clash.ini
 自定义规则统一在 `list/` 中维护。所有运行时规则均已收录到本仓库，配置不再直接下载其他规则仓库的文件。规则从上到下匹配，修改时请保留末尾的 `FINAL` 规则。
 
 安卓端建议使用 FlClash 导入 `mihomo.yaml`。模板不会保存私人订阅地址或令牌；手机无法访问 GitHub 时，可由 NAS 在局域网提供配置和安装包。
+
+## 手工修正国内流量
+
+无法识别的国内地址统一添加到 `list/CustomDirect.list`，每行一条且不要附带策略组。例如：
+
+```text
+DOMAIN-SUFFIX,example.cn
+DOMAIN,www.example.com
+DOMAIN-KEYWORD,example
+IP-CIDR,203.0.113.10/32,no-resolve
+IP-CIDR,203.0.113.0/24,no-resolve
+IP-CIDR6,2001:db8::/32,no-resolve
+```
+
+优先使用 `DOMAIN-SUFFIX`；只有应用直接访问 IP、无法按域名匹配时才添加 IP。单个 IPv4 地址使用 `/32`，一段地址则填写实际 CIDR。修改后需要让客户端更新 `CustomDirect` 规则提供器或重新加载配置。
 
 ## MDC-NG 分流
 
